@@ -1,6 +1,7 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include "heron.h"
+
+#define TEST 0.0000001
 
 /**
  * heron - puts a heron series in a linked list
@@ -11,30 +12,33 @@
 
 t_cell *heron(double b, double x0)
 {
-	double test = 1;
-	t_cell *head, *current, *newnode;
+	double check = 1;
+	t_cell *head = NULL, *current, *newnode;
 
 	current = malloc(sizeof(*current));
 	if (current == NULL)
-		return (NULL);
+		return (head);
 	if (x0 < 1)
-		return (NULL);
-	if (b < 1)
-		return (NULL);
+		return (head);
 	head = current;
 	current->n = x0;
 	current->next = NULL;
-	while (test > 0.0000001)
+	if (b == 1)
+		return (head);
+	if (b < 1)
+		return (NULL);
+	while (check >= TEST)
 	{
 		newnode = malloc(sizeof(*newnode));
 		if (newnode == NULL)
 			return (NULL);
+
 		newnode->n = 0.5 * (current->n + b / current->n);
 		newnode->next = current;
-		test = newnode->n - current->n;
-		if (test < 0)
-			test = test * -1;
-		if (test < 0.0000001)
+
+		if (current->n > 1)
+			check = current->n - newnode->n;
+		if (check < TEST)
 			break;
 		current = newnode;
 		head = current;
