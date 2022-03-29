@@ -5,7 +5,7 @@
 /**
  * heron - puts a heron series in a linked list
  * @b: the number to be used
- * @x0: the first guess in the sequence
+ * @x0: the first guess in the sequence, starts as 1
  * Return: a ptr to the start of the linked list
  */
 
@@ -16,6 +16,10 @@ t_cell *heron(double b, double x0)
 
 	current = malloc(sizeof(*current));
 	if (current == NULL)
+		return (NULL);
+	if (x0 < 1)
+		return (NULL);
+	if (b < 1)
 		return (NULL);
 	head = current;
 	current->n = x0;
