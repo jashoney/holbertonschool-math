@@ -21,7 +21,7 @@ t_cell *heron(double b, double x0)
 	if (x0 < 1)
 		return (head);
 	head = current;
-	current->n = x0;
+	current->elt = x0;
 	current->next = NULL;
 	if (b == 1)
 		return (head);
@@ -33,11 +33,11 @@ t_cell *heron(double b, double x0)
 		if (newnode == NULL)
 			return (NULL);
 
-		newnode->n = 0.5 * (current->n + b / current->n);
+		newnode->elt = 0.5 * (current->elt + b / current->elt);
 		newnode->next = current;
 
-		if (current->n > 1)
-			check = current->n - newnode->n;
+		if (current->elt > 1)
+			check = current->elt - newnode->elt;
 		if (check < TEST)
 			break;
 		current = newnode;

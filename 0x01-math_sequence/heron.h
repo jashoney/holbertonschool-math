@@ -9,7 +9,7 @@
 
 typedef struct node
 {
-	double n;
+	double elt;
 	struct node *next;
 } t_cell;
 
